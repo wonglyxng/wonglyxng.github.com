@@ -145,6 +145,73 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/22/ubuntu20-4%E7%BC%96%E8%AF%91opencv-c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王理想">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王理想的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/22/ubuntu20-4%E7%BC%96%E8%AF%91opencv-c/" class="post-title-link" itemprop="url">ubuntu20.4编译opencv-c++</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-22 23:22:17 / Modified: 23:43:32" itemprop="dateCreated datePublished" datetime="2021-12-22T23:22:17+08:00">2021-12-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>1.创建opencv_build目录<br>$ cd ~/work/cppspace<br>$ mkdir opencv_build &amp;&amp; cd opencv_build</p>
+<p>2.下载opencv和opencv_contrib源码<br>$ git clone <a target="_blank" rel="noopener" href="https://github.com/opencv/opencv.git">https://github.com/opencv/opencv.git</a><br>$ git clone <a target="_blank" rel="noopener" href="https://github.com/opencv/opencv_contrib.git">https://github.com/opencv/opencv_contrib.git</a></p>
+<p>3.创建build目录<br>$ cd opencv<br>$ mkdir -p build &amp;&amp; cd build</p>
+<p>4.构建opencv<br>$ cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local -DINSTALL_PYTHON_EXAMPLES=ON -DBUILD_EXAMPLES=ON -DOPENCV_GENERATE_PKGCONFIG=ON -DOPENCV_EXTRA_MODULES_PATH=~/work/cppspace/opencv_build/opencv_contrib/modules -DINSTALL_C_EXAMPLES=ON  ..</p>
+<p>5.查看cpu核数<br>$ nproc<br>8</p>
+<p>6.开始编译<br>$ make -j8</p>
+<p>7.安装opencv<br>$ sudo make install</p>
+<p>8.验证安装<br>c++:<br>$ pkg-config –modversion opencv4</p>
+<p>python:<br>$ python3 -c “import cv2; print(cv2.<strong>version</strong>)”</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/21/hexo%E5%88%9B%E5%BB%BA%E6%96%B0%E6%96%87%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -453,7 +520,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
