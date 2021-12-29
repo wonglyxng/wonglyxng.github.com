@@ -145,6 +145,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/cmake%E7%94%A8%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王理想">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王理想的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/27/cmake%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">cmake用法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-27 11:47:41" itemprop="dateCreated datePublished" datetime="2021-12-27T11:47:41+08:00">2021-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-29 23:46:10" itemprop="dateModified" datetime="2021-12-29T23:46:10+08:00">2021-12-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>1.查看支持模块列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake --help-module-list</span><br><span class="line">cmake --help-module FindBZip2</span><br></pre></td></tr></table></figure>
+
+<p>2.查找包是如何工作的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find_package()命令会在模块路径中寻找Find&lt;name&gt;.cmake</span><br><span class="line">首先，CMake查看$&#123;CMAKE_MODULE_PATH&#125;中的所有目录，然后，再查看它自己的模块目录&lt;CMAKE_ROOT&gt;/share/cmake-x.y/Modules/</span><br><span class="line">如果没找到这样的文件，会寻找&lt;Name&gt;Config.cmake或者&lt;lower-case-name&gt;-config.cmake，它们是假定库会安装的文件</span><br></pre></td></tr></table></figure>
+<p>只要找到包，就会定义下面这些变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;NAME&gt;_FOUND</span><br><span class="line">&lt;NAME&gt;_INCLUDE_DIRS or &lt;NAME&gt;_INCLUDES</span><br><span class="line">&lt;NAME&gt;_LIBRARIES or &lt;NAME&gt;_LIBRARIES or &lt;NAME&gt;_LIBS</span><br><span class="line">&lt;NAME&gt;_DEFINITIONS</span><br></pre></td></tr></table></figure>
+<p>这些都在Find<name>.cmake 文件中</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/22/ubuntu20-4%E7%BC%96%E8%AF%91opencv-c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -526,7 +598,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
