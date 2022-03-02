@@ -145,6 +145,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/02/protoc3%E6%8F%90%E7%A4%BA%E9%94%99%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王理想">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王理想的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/02/protoc3%E6%8F%90%E7%A4%BA%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">protoc3提示错误</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-02 23:06:32 / Modified: 23:49:01" itemprop="dateCreated datePublished" datetime="2022-03-02T23:06:32+08:00">2022-03-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1-权限不够"><a href="#1-权限不够" class="headerlink" title="1.权限不够"></a>1.权限不够</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ protoc --go_out=. api.proto</span><br><span class="line">bash: /usr/<span class="built_in">local</span>/bin/protoc: 权限不够</span><br></pre></td></tr></table></figure>
+
+<p>解决办法：<br>给protoc修改权限</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 755 /usr/<span class="built_in">local</span>/bin/protoc</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-找不到protoc-gen-go"><a href="#2-找不到protoc-gen-go" class="headerlink" title="2.找不到protoc-gen-go"></a>2.找不到protoc-gen-go</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ protoc --go_out=. api.proto</span><br><span class="line">protoc-gen-go: program not found or is not executable</span><br><span class="line">Please specify a program using absolute path or make sure the program is available <span class="keyword">in</span> your PATH system variable</span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br></pre></td></tr></table></figure>
+
+<p>解决办法：<br>将protoc-gen-go所在路径添加到PATH</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;<span class="variable">$PATH</span>:<span class="subst">$(go env GOPATH)</span>/bin&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-protoc-gen-go无法找到”api-proto”的Go导入路径"><a href="#3-protoc-gen-go无法找到”api-proto”的Go导入路径" class="headerlink" title="3.protoc-gen-go无法找到”api.proto”的Go导入路径"></a>3.protoc-gen-go无法找到”api.proto”的Go导入路径</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ protoc --go_out=. ./api.proto</span><br><span class="line">protoc-gen-go: unable to determine Go import path <span class="keyword">for</span> <span class="string">&quot;api.proto&quot;</span></span><br><span class="line"></span><br><span class="line">Please specify either:</span><br><span class="line">	• a <span class="string">&quot;go_package&quot;</span> option <span class="keyword">in</span> the .proto <span class="built_in">source</span> file, or</span><br><span class="line">	• a <span class="string">&quot;M&quot;</span> argument on the <span class="built_in">command</span> line.</span><br><span class="line"></span><br><span class="line">See https://developers.google.com/protocol-buffers/docs/reference/go-generated<span class="comment">#package for more information.</span></span><br><span class="line"></span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br></pre></td></tr></table></figure>
+
+<p>解决办法：<br>在api.proto文件中添加所生成的api.pb.go文件的路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">syntax = &quot;proto3&quot;;</span><br><span class="line"></span><br><span class="line">option go_package=&quot;../protobuf&quot;;</span><br><span class="line"></span><br><span class="line">message&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/cmake%E7%94%A8%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -598,7 +670,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -626,7 +698,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
